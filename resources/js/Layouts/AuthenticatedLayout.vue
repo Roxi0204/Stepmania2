@@ -16,14 +16,16 @@ const showingNavigationDropdown = ref(false);
         <div class="min-h-screen bg-gray-100">
             <nav
                 class="border-b border-gray-100 bg-white"
+                role="navigation"
+                aria-label="Main Navigation"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 justify-between">
-                        <div class="flex">
+                    <div class="flex h-16 justify-between items-center flex-wrap">
+                        <div class="flex items-center">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('dashboard')" aria-label="Go to Dashboard">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
@@ -33,10 +35,10 @@ const showingNavigationDropdown = ref(false);
                             <!-- Navigation Links -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                role="menu"
+                                aria-label="Primary Navigation Links"
                             >
-                                
-                                
-                                 <NavLink   
+                                <NavLink
                                     :href="route('announcements.index')"
                                     :active="route().current('dashboard')"
                                 >
@@ -54,6 +56,8 @@ const showingNavigationDropdown = ref(false);
                                             <button
                                                 type="button"
                                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
                                             >
                                                 {{ $page.props.auth.user.name }}
 
@@ -76,6 +80,7 @@ const showingNavigationDropdown = ref(false);
                                     <template #content>
                                         <DropdownLink
                                             :href="route('profile.edit')"
+                                            aria-label="Edit Profile"
                                         >
                                             Profile
                                         </DropdownLink>
@@ -83,6 +88,7 @@ const showingNavigationDropdown = ref(false);
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
+                                            aria-label="Log Out"
                                         >
                                             Log Out
                                         </DropdownLink>
@@ -99,6 +105,8 @@ const showingNavigationDropdown = ref(false);
                                         !showingNavigationDropdown
                                 "
                                 class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                aria-label="Toggle Navigation Menu"
+                                aria-expanded="showingNavigationDropdown"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -149,6 +157,12 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('announcements.index')"
+                            :active="route().current('announcements.index')"
+                        >
+                            Anuncios
+                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -197,6 +211,7 @@ const showingNavigationDropdown = ref(false);
                 <slot />
             </main>
         </div>
-    </div>
+
         <CookieBanner />
+    </div>
 </template>

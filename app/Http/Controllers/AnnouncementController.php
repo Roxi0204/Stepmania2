@@ -24,7 +24,7 @@ class AnnouncementController extends Controller
         $category= Category::get();
         $announcements = Announcement::with('category')->get();
 
-         return Inertia::render('Dashboard', [
+         return Inertia::render('Announcements', [
             'pagination' => $pagination,
             'announcements' => $announcements,
             'categories' => $category,

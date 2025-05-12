@@ -37,7 +37,7 @@ function submitForm($id) {
 </script>
 
 <template>
-    <div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded">
+    <div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded mt-16">
         <h1 class="text-2xl font-bold mb-4">Editar Anuncio</h1>
         <form @submit.prevent="submitForm(props.announcement.id)">
             <div class="mb-4">

@@ -1,7 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
-import CookieBanner from '@/Components/CookieBanner.vue';
+import CookieBanner from '@/Components/CookieConsent.vue';
 </script>
 
 <template>

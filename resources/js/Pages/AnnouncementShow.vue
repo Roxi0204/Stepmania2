@@ -34,32 +34,50 @@ const deleteAnnouncement = (id) => {
 };
 </script>
 
+
 <template>
     <Head :title="`Anuncio - ${props.announcement.title}`" />
 
     <AuthenticatedLayout>
-        <div class="py-12">
+        <div class="py-12" role="main" aria-labelledby="announcement-title">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg" role="region" aria-labelledby="announcement-title">
                     <div class="p-6">
-                        <h1 class="text-2xl font-bold mb-4">{{ props.announcement.title }}</h1>
-                        <p class="text-gray-700 mb-4">{{ props.announcement.description }}</p>
-                        <p class="text-gray-700 mb-4">{{ props.announcement.email }}</p>
-                        <p class="text-sm text-gray-500">Publicado el: {{ formatDate(props.announcement.created_at) }}</p>
-                        <p class="text-gray-700 mb-4">{{ props.announcement.category.name }}</p>
+                        <h1 id="announcement-title" class="text-2xl font-bold mb-4 text-center sm:text-left">
+                            {{ props.announcement.title }}
+                        </h1>
+                        <p id="announcement-description" class="text-gray-700 mb-4 text-justify">
+                            {{ props.announcement.description }}
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            <span class="sr-only">Correo electrónico del autor:</span>
+                            {{ props.announcement.email }}
+                        </p>
+                        <p class="text-sm text-gray-500">
+                            <span class="sr-only">Fecha de publicación:</span>
+                            Publicado el: {{ formatDate(props.announcement.created_at) }}
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            <span class="sr-only">Categoría:</span>
+                            {{ props.announcement.category.name }}
+                        </p>
                         <!-- Botones de Editar y Borrar -->
-                        <div class="flex space-x-4 mt-6">
-                            <Link :href="route('announcements.edit', props.announcement.id)"
-                                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
+                            <Link 
+                                :href="route('announcements.edit', props.announcement.id)"
+                                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                aria-label="Editar anuncio"
                             >
                                 Editar
                             </Link>
-                            <button
+                            <Link
                                 @click.prevent="deleteAnnouncement(props.announcement.id)"
-                                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                                class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+                                aria-label="Borrar anuncio"
                             >
+                            <span class="sr-only">Borrar anuncio</span>
                                 Borrar
-                            </button>
+                        </Link>
                         </div>
                     </div>
                 </div>
